@@ -30,6 +30,8 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DUSE_NLS=OFF
 -DWITH_DOC=OFF
 -DWITH_DOC_MANPAGES=ON
+-DCMAKE_C_COMPILER_WORKS=ON
+-DCMAKE_CXX_COMPILER_WORKS=ON
 "
 
 # ubuntu uses instead $PREFIX/lib instead of $PREFIX/libexec to
@@ -74,10 +76,8 @@ termux_step_pre_configure() {
 
 termux_step_post_make_install() {
 	{
-		echo "# The main termux repository, with cloudflare cache"
-		echo "deb https://packages-cf.termux.dev/apt/termux-main/ stable main"
-		echo "# The main termux repository, without cloudflare cache"
-		echo "# deb https://packages.termux.dev/apt/termux-main/ stable main"
+		echo "# The main VARIS custom cloud repository layout"
+		echo "deb [trusted=yes] https://hacker2008-cyber.github.io/varis-packages/ stable main"
 	} > $TERMUX_PREFIX/etc/apt/sources.list
 
 	# apt-transport-tor
